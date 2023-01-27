@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require(".config/connection");
 
 const mongodb = require("mongodb").MongoClient;
 
@@ -7,10 +8,10 @@ const mongodb = require("mongodb").MongoClient;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const connectionStringURI = `mongodb://127.0.0.1:27017/infobahnDB`;
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Declare a variable to hold the connection
-let db;
+const connectionStringURI = `mongodb://127.0.0.1:27017/infobahnDB`;
 
 // Creates a connection to a MongoDB instance and returns the reference to the database
 mongodb.connect(
@@ -26,5 +27,3 @@ mongodb.connect(
     });
   }
 );
-
-app.use(express.json());
