@@ -4,6 +4,7 @@
 
 // Destructures Schema from Mongoose
 const { Schema, model } = require("mongoose");
+const reactionSchema = require("./Reaction");
 
 // Creates a new instance of the Mongoose schema to define shape of each document
 const thoughtSchema = new Schema(
