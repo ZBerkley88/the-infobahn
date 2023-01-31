@@ -1,4 +1,4 @@
-const { Thought, User } = require("../../models");
+const { Thought, User } = require("../models");
 
 // The controller files contain the functions we want our server to execute
 module.exports = {
