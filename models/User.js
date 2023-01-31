@@ -42,12 +42,14 @@ userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-// Validates unique user email
+// Validates unique user email (DOES NOT WORK)
 // from: https://www.youtube.com/watch?v=Z8Aebt9tvT8&ab_channel=NamasteProgramming
-userSchema.path("email").validate(async (email) => {
-  const emailCount = await mongoose.models.users.countDocuments({ email });
-  return !emailCount;
-}, "An account with this email already exists.");
+
+// userSchema.path("email").validate(async (email) => {
+//   const emailCount = await mongoose.models.users.countDocuments({ email });
+//   return !emailCount;
+// }, "An account with this email already exists.");
+
 
 // Initializes our User model
 const User = model("users", userSchema);
