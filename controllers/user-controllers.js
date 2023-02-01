@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const { User, Thought } = require("../models");
 
 // The controller files contain the functions we want our server to execute
 module.exports = {
@@ -8,6 +8,7 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
+
   // GET one user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
@@ -20,12 +21,14 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
   // CREATE a new user
   createUser(req, res) {
     User.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
+
   // UPDATE user
   updateUser(req, res) {
     User.findOneAndUpdate(
@@ -43,9 +46,19 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-};
 
-// DELETE user
+  // DELETE user
+  deleteUser(req, res) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
+      .catch((err) => res.status(500).json(err));
+  },
+};
 
 // ADD friend
 
