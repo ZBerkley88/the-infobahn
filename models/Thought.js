@@ -23,10 +23,11 @@ const thoughtSchema = new Schema(
         required: true,
     },
     reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "reactions",
-      },
+      // {
+      //   type: Schema.Types.ObjectId,
+      //   ref: "reactions",
+      // },
+      reactionSchema
     ],
   },
   {

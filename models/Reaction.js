@@ -2,7 +2,7 @@
 // Use a getter method to format the timestamp on query
 
 // Destructures Schema from Mongoose
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 // Creates a new instance of the Mongoose schema to define shape of each document
 const reactionSchema = new Schema(
@@ -29,6 +29,7 @@ const reactionSchema = new Schema(
     toJSON: {
       getters: true,
     },
+    id: false
   }
 );
 
