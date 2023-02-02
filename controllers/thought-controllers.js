@@ -45,5 +45,38 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+
+    // UPDATE thought
+    updateThought(req, res) {
+      Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+        .then((thought) =>
+          !thought
+            ? res.status(404).json({ message: "No thought with this ID!" })
+            : res.json(thought)
+        )
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json(err);
+        });
+    },
+
+    // DELETE thought 
+  deleteThought(req, res) {
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this ID!" })
+          : Thought.deleteOne
+      )
+      .then(() =>
+        res.json({ message: "Your mind was erased!" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
+
 
