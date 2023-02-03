@@ -87,4 +87,21 @@ module.exports = {
       )
       .catch((err) => { console.log(err), res.status(500).json(err) } );
   },
+
+    // DELETE reaction
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { runValidators: true, new: true }
+      )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this ID!" })
+          : Thought.deleteOne
+      )
+      .then(() => res.json({ message: "Your mind was erased!" }))
+      .catch((err) => res.status(500).json(err));
+  },
 };
+
