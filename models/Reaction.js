@@ -1,8 +1,6 @@
-// TODO:
-// Use a getter method to format the timestamp on query
-
 // Destructures Schema from Mongoose
 const { Schema, model, Types } = require("mongoose");
+const formatDate = require("../utils/formatDate")
 
 // Creates a new instance of the Mongoose schema to define shape of each document
 const reactionSchema = new Schema(
@@ -22,7 +20,7 @@ const reactionSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      get: formatDate
     },
   },
   {

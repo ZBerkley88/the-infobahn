@@ -1,0 +1,7 @@
+const formatDate = () => {
+  var date = new Date();
+  var formattedDated = date.toLocaleString();
+  return formattedDated;
+};
+
+module.exports = formatDate;
